@@ -14,16 +14,10 @@ Shoes Website/
 │   └── Best.png                    # Exploded anatomy hero image
 └── ShoeShowcasing/
     └── Frames/
-        ├── frame_1_shoe_floating/  # 300 PNGs — Hero scroll sequence
-        └── frame_2_/              # 300 PNGs — Anatomy scroll sequence
+        ├── frame_1_shoe_floating/  
+        └── frame_2_/             
 ```
 
-### Stack
-
-- **Tailwind CSS** — utility styling
-- **GSAP + ScrollTrigger** — scroll-driven pinning & animation
-- **Lenis** — smooth scroll
-- **Canvas API** — 60 FPS frame rendering
 
 ### Run
 
