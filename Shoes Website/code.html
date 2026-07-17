@@ -565,31 +565,25 @@
 
             this.currentFrame = index;
             const img = this.frames[index];
-            this._renderContain(img);
+            this._renderWidthFill(img);
         }
 
-        /* object-fit: contain — full image always visible, centered, black bars fill gaps */
-        _renderContain(img) {
+        /* Full-width cinematic render — fills canvas width edge-to-edge,
+           centers vertically. On landscape desktops the image extends
+           slightly beyond viewport top/bottom (minimal center-crop);
+           on portrait mobiles it letterboxes with black bars. */
+        _renderWidthFill(img) {
             const cw = this.canvas.width;
             const ch = this.canvas.height;
             const iw = img.naturalWidth;
             const ih = img.naturalHeight;
 
-            const canvasRatio = cw / ch;
-            const imgRatio = iw / ih;
-
-            let dw, dh, dx, dy;
-            if (imgRatio > canvasRatio) {
-                dw = cw;
-                dh = cw / imgRatio;
-                dx = 0;
-                dy = (ch - dh) / 2;
-            } else {
-                dh = ch;
-                dw = ch * imgRatio;
-                dx = (cw - dw) / 2;
-                dy = 0;
-            }
+            // Always scale to fill canvas width
+            const scale = cw / iw;
+            const dw = cw;
+            const dh = ih * scale;
+            const dx = 0;
+            const dy = (ch - dh) / 2; // center vertically
 
             this.ctx.clearRect(0, 0, cw, ch);
             this.ctx.drawImage(img, 0, 0, iw, ih, dx, dy, dw, dh);
@@ -605,7 +599,7 @@
             this.ctx.imageSmoothingEnabled = true;
             this.ctx.imageSmoothingQuality = 'high';
             if (this.currentFrame >= 0 && this.frames[this.currentFrame]) {
-                this._renderContain(this.frames[this.currentFrame]);
+                this._renderWidthFill(this.frames[this.currentFrame]);
             }
         }
     }
@@ -721,8 +715,8 @@
         dismissLoader();
         setupScrollTriggers();
 
-        // Phase 1.5: Pre-load anatomy frame 0 to prevent flash
-        await anatomyPlayer.loadBatch(0, 1);
+        // Phase 1.5: Pre-load first 10 anatomy frames to prevent flash/black gaps
+        await anatomyPlayer.loadBatch(0, 10);
         anatomyPlayer.drawFrame(0);
         anatomyPlayer.canvas.style.opacity = '1';
 
@@ -747,6 +741,7 @@
             start: 'top top',
             end: 'bottom bottom',
             pin: '#hero-canvas-wrapper',
+            anticipatePin: 1,
             onUpdate: (self) => {
                 const p = self.progress;
 
@@ -762,8 +757,8 @@
                 const cueOpacity = gsap.utils.clamp(0, 1, 1 - (p / 0.05));
                 scrollCue.style.opacity = cueOpacity;
 
-                // Trigger anatomy preloading at 40% hero scroll
-                if (p > 0.4 && !anatomyLoadStarted) {
+                // Trigger anatomy bulk-load at 30% hero scroll
+                if (p > 0.3 && !anatomyLoadStarted) {
                     startAnatomyLoad();
                 }
             }
@@ -775,6 +770,7 @@
             start: 'top top',
             end: 'bottom bottom',
             pin: '#anatomy-canvas-wrapper',
+            anticipatePin: 1,
             onUpdate: (self) => {
                 const p = self.progress;
 
