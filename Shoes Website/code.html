@@ -174,7 +174,7 @@
         text-transform: uppercase;
     }
 
-    /* ===== Top Progress Bar (visible after loader hides) ===== */
+    /* ===== Top Progress Bar ===== */
     #top-progress {
         position: fixed;
         top: 0;
@@ -228,6 +228,7 @@
         width: 100%;
         height: 100%;
         background: #000000;
+        transition: opacity 0.4s ease;
     }
 
     /* ===== Hero Overlay ===== */
@@ -266,24 +267,13 @@
         50% { transform: translateX(-50%) translateY(8px); }
     }
 
-    /* ===== Section Transitions ===== */
-    .section-fade-in {
-        opacity: 0;
-        transform: translateY(40px);
-        transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .section-fade-in.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    /* ===== Macro Sections (preserved from original) ===== */
+    /* ===== Macro Sections ===== */
     .mask-image-bottom {
         -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
         mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
     }
 
-    /* ===== Anatomy Section Transition Overlay ===== */
+    /* ===== Anatomy Section Overlay ===== */
     .anatomy-intro-overlay {
         position: absolute;
         inset: 0;
@@ -301,6 +291,32 @@
         color: #88919d;
         text-transform: uppercase;
         opacity: 0;
+    }
+
+    /* ===== Innovation Showcase Image ===== */
+    .innovation-img-wrapper {
+        position: relative;
+        overflow: hidden;
+        border-radius: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .innovation-img-wrapper::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.4);
+        pointer-events: none;
+    }
+    .innovation-img-wrapper img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .innovation-img-wrapper:hover img {
+        transform: scale(1.03);
     }
 </style>
 </head>
@@ -355,7 +371,7 @@
 </section>
 
 <!-- ========================================== -->
-<!-- SECTION 1.5: MACRO DARK (unchanged)        -->
+<!-- SECTION 1.5: MACRO DARK                    -->
 <!-- ========================================== -->
 <section class="relative h-[150vh] w-full bg-background overflow-hidden" id="macro-dark">
     <div class="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
@@ -372,7 +388,7 @@
 </section>
 
 <!-- ========================================== -->
-<!-- SECTION 1.6: MACRO GLOW (unchanged)        -->
+<!-- SECTION 1.6: MACRO GLOW                    -->
 <!-- ========================================== -->
 <section class="relative h-[150vh] w-full bg-background overflow-hidden" id="macro-glow">
     <div class="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
@@ -395,7 +411,6 @@
 <section class="sequence-section" id="anatomy-sequence" style="height: 500vh;">
     <div class="canvas-wrapper" id="anatomy-canvas-wrapper">
         <canvas class="sequence-canvas" id="anatomy-canvas"></canvas>
-        <!-- Subtle section intro label -->
         <div class="anatomy-intro-overlay">
             <span class="anatomy-label" id="anatomy-label">AERO-FRAME ANATOMY</span>
         </div>
@@ -403,7 +418,7 @@
 </section>
 
 <!-- ========================================== -->
-<!-- SECTION 3: INNOVATION (unchanged)          -->
+<!-- SECTION 3: INNOVATION — Best.png showcase  -->
 <!-- ========================================== -->
 <section class="relative min-h-screen w-full flex items-center justify-center py-section-gap px-margin-mobile md:px-margin-desktop bg-background overflow-hidden" id="innovation">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-stack-lg max-w-[1440px] w-full mx-auto relative z-10">
@@ -422,8 +437,12 @@
             </div>
         </div>
         <div class="order-1 md:order-2 flex items-center justify-center relative h-[50vh] md:h-[80vh] innovation-img-container">
+            <!-- Subtle Glow Background -->
             <div class="absolute inset-0 bg-primary opacity-10 blur-[100px] rounded-full transform scale-75"></div>
-            <img class="w-full h-full object-cover rounded-3xl z-10 innovation-shoe border border-glass-stroke" alt="Profile view of the VELOCITY-X shoe with electric blue lightning effect" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBy0Q1ZE4-6C73oWNOLB3jOuFhIKcmIo2xn63HrCkkndNvj8jzFrTWfMmEjNPaczPaJEcBF0JDKnuDFlshCqnXOl_9VBPFj6hmshNwbn6XEfA-5A5qzRy6w7VAm1CJrPhXNYRmUlQ1jRh5OSHrEksYut7BXvqeZHPD0XmS8jSvSnM8Q4ttAPhJjMmw8vkO5UxiMeyr432MLY1cf-6iTw2xSB9YJVVrrpHof_Lb7JLA-FZnt6p77w4qNxoKlXC24D1A93w"/>
+            <!-- Best.png — premium exploded anatomy showcase -->
+            <div class="innovation-img-wrapper w-full h-full z-10">
+                <img alt="Exploded 3D anatomy of the VELOCITY-X shoe showing five layers: knit upper, carbon plate, premium foam midsole, air cushion technology, and durable outsole, surrounded by dramatic water splashes on a dark background." src="Refrence_Image/Best.png"/>
+            </div>
         </div>
     </div>
 </section>
@@ -440,7 +459,7 @@
         <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Technical Specs</a>
     </div>
     <div class="font-label-caps text-label-caps text-on-surface-variant">
-        © 2024 NEXT-GEN ATHLETICS. ALL RIGHTS RESERVED.
+        &copy; 2024 NEXT-GEN ATHLETICS. ALL RIGHTS RESERVED.
     </div>
 </footer>
 
@@ -471,8 +490,8 @@
         }
     };
 
-    const BATCH_SIZE = 20;           // frames loaded per batch
-    const INITIAL_FRAMES = 40;       // frames to load before hiding loader
+    const BATCH_SIZE = 20;
+    const INITIAL_FRAMES = 40;
 
     /* =========================================
        FRAME PLAYER CLASS
@@ -489,18 +508,15 @@
             this.isFullyLoaded = false;
             this._resizeCanvas();
 
-            // High quality scaling
             this.ctx.imageSmoothingEnabled = true;
             this.ctx.imageSmoothingQuality = 'high';
         }
 
-        /* Generate the file path for a frame index (0-based) */
         _getPath(index) {
             const num = String(index + 1).padStart(3, '0');
             return `ShoeShowcasing/Frames/${this.folder}/ezgif-frame-${num}.png`;
         }
 
-        /* Load a single frame, returns a Promise */
         _loadOne(index) {
             return new Promise((resolve) => {
                 if (this.frames[index]) { resolve(true); return; }
@@ -511,14 +527,11 @@
                     if (this.loadedCount === this.totalFrames) this.isFullyLoaded = true;
                     resolve(true);
                 };
-                img.onerror = () => {
-                    resolve(false);
-                };
+                img.onerror = () => resolve(false);
                 img.src = this._getPath(index);
             });
         }
 
-        /* Load a batch of frames (start inclusive, end exclusive) */
         async loadBatch(start, end) {
             const promises = [];
             const clampedEnd = Math.min(end, this.totalFrames);
@@ -528,7 +541,6 @@
             await Promise.all(promises);
         }
 
-        /* Load all frames in sequential batches, calling onProgress after each batch */
         async loadAll(onProgress) {
             for (let i = 0; i < this.totalFrames; i += BATCH_SIZE) {
                 await this.loadBatch(i, i + BATCH_SIZE);
@@ -536,7 +548,6 @@
             }
         }
 
-        /* Find the nearest loaded frame to the target index */
         _findNearest(target) {
             if (this.frames[target]) return target;
             for (let offset = 1; offset < this.totalFrames; offset++) {
@@ -548,18 +559,17 @@
             return -1;
         }
 
-        /* Draw a specific frame index to the canvas */
         drawFrame(targetIndex) {
             const index = this._findNearest(targetIndex);
             if (index < 0 || index === this.currentFrame) return;
 
             this.currentFrame = index;
             const img = this.frames[index];
-            this._renderCover(img);
+            this._renderContain(img);
         }
 
-        /* Draw the image to fill the canvas (object-fit: cover behavior) */
-        _renderCover(img) {
+        /* object-fit: contain — full image always visible, centered, black bars fill gaps */
+        _renderContain(img) {
             const cw = this.canvas.width;
             const ch = this.canvas.height;
             const iw = img.naturalWidth;
@@ -568,38 +578,34 @@
             const canvasRatio = cw / ch;
             const imgRatio = iw / ih;
 
-            let sx, sy, sw, sh;
+            let dw, dh, dx, dy;
             if (imgRatio > canvasRatio) {
-                // Image wider than canvas — crop sides
-                sh = ih;
-                sw = sh * canvasRatio;
-                sx = (iw - sw) / 2;
-                sy = 0;
+                dw = cw;
+                dh = cw / imgRatio;
+                dx = 0;
+                dy = (ch - dh) / 2;
             } else {
-                // Image taller than canvas — crop top/bottom
-                sw = iw;
-                sh = sw / canvasRatio;
-                sx = 0;
-                sy = (ih - sh) / 2;
+                dh = ch;
+                dw = ch * imgRatio;
+                dx = (cw - dw) / 2;
+                dy = 0;
             }
 
-            this.ctx.drawImage(img, sx, sy, sw, sh, 0, 0, cw, ch);
+            this.ctx.clearRect(0, 0, cw, ch);
+            this.ctx.drawImage(img, 0, 0, iw, ih, dx, dy, dw, dh);
         }
 
-        /* Resize the canvas to fill the viewport */
         _resizeCanvas() {
             this.canvas.width = window.innerWidth;
             this.canvas.height = window.innerHeight;
         }
 
-        /* Handle window resize */
         resize() {
             this._resizeCanvas();
             this.ctx.imageSmoothingEnabled = true;
             this.ctx.imageSmoothingQuality = 'high';
-            // Redraw current frame at new size
             if (this.currentFrame >= 0 && this.frames[this.currentFrame]) {
-                this._renderCover(this.frames[this.currentFrame]);
+                this._renderContain(this.frames[this.currentFrame]);
             }
         }
     }
@@ -632,17 +638,14 @@
         infinite: false,
     });
 
-    // Stop scrolling while loading
     lenis.stop();
 
-    // Integrate Lenis with GSAP ticker
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add((time) => {
         lenis.raf(time * 1000);
     });
     gsap.ticker.lagSmoothing(0);
 
-    // Register ScrollTrigger
     gsap.registerPlugin(ScrollTrigger);
 
     /* =========================================
@@ -650,6 +653,9 @@
     ========================================= */
     const heroPlayer = new FramePlayer(SEQUENCES.hero);
     const anatomyPlayer = new FramePlayer(SEQUENCES.anatomy);
+
+    // Hide anatomy canvas until frame 0 is pre-drawn — prevents flash
+    anatomyPlayer.canvas.style.opacity = '0';
 
     /* =========================================
        LOADING ORCHESTRATION
@@ -669,10 +675,7 @@
         const pct = (totalLoadedGlobal / totalFramesGlobal) * 100;
         topProgress.style.width = pct + '%';
         if (totalLoadedGlobal >= totalFramesGlobal) {
-            // Fully loaded — fade out the progress bar
-            setTimeout(() => {
-                topProgress.style.opacity = '0';
-            }, 500);
+            setTimeout(() => { topProgress.style.opacity = '0'; }, 500);
         }
     }
 
@@ -680,37 +683,20 @@
         if (loaderDismissed) return;
         loaderDismissed = true;
 
-        // Draw first frame
         heroPlayer.drawFrame(0);
-
-        // Fade out loader
         loader.classList.add('hidden');
-
-        // Enable scrolling
         lenis.start();
-
-        // Show top progress bar for remaining loads
         topProgress.style.opacity = '1';
 
-        // Animate hero title in
-        setTimeout(() => {
-            animateHeroIntro();
-        }, 600);
+        setTimeout(() => { animateHeroIntro(); }, 600);
     }
 
     function animateHeroIntro() {
         gsap.to(heroTitle, {
-            opacity: 1,
-            y: 0,
-            duration: 1.2,
-            ease: 'power3.out',
+            opacity: 1, y: 0, duration: 1.2, ease: 'power3.out',
         });
         gsap.to(heroSubtitle, {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: 'power2.out',
-            delay: 0.4,
+            opacity: 1, y: 0, duration: 1, ease: 'power2.out', delay: 0.4,
         });
     }
 
@@ -726,23 +712,28 @@
 
     /* Main loading sequence */
     async function initLoading() {
-        // Phase 1: Load hero initial frames (fast — enough to start)
+        // Phase 1: Load hero initial frames
         await heroPlayer.loadBatch(0, INITIAL_FRAMES);
         totalLoadedGlobal = heroPlayer.loadedCount;
         updateLoaderUI(heroPlayer.loadedCount, SEQUENCES.hero.totalFrames);
 
-        // Dismiss loader — user can start scrolling
+        // Dismiss loader
         dismissLoader();
         setupScrollTriggers();
 
-        // Phase 2: Continue loading remaining hero frames in background
+        // Phase 1.5: Pre-load anatomy frame 0 to prevent flash
+        await anatomyPlayer.loadBatch(0, 1);
+        anatomyPlayer.drawFrame(0);
+        anatomyPlayer.canvas.style.opacity = '1';
+
+        // Phase 2: Continue loading remaining hero frames
         for (let i = INITIAL_FRAMES; i < SEQUENCES.hero.totalFrames; i += BATCH_SIZE) {
             await heroPlayer.loadBatch(i, i + BATCH_SIZE);
             totalLoadedGlobal = heroPlayer.loadedCount + anatomyPlayer.loadedCount;
             updateTopProgress();
         }
 
-        // Phase 3: Start anatomy sequence loading
+        // Phase 3: Load remaining anatomy frames
         await startAnatomyLoad();
     }
 
@@ -759,23 +750,20 @@
             onUpdate: (self) => {
                 const p = self.progress;
 
-                // Map scroll progress → frame index
                 const frameIndex = Math.min(
                     Math.floor(p * SEQUENCES.hero.totalFrames),
                     SEQUENCES.hero.totalFrames - 1
                 );
                 heroPlayer.drawFrame(frameIndex);
 
-                // Fade out hero text overlay (0% → 12% scroll)
                 const overlayOpacity = gsap.utils.clamp(0, 1, 1 - (p / 0.12));
                 heroOverlay.style.opacity = overlayOpacity;
 
-                // Fade out scroll cue immediately (0% → 5% scroll)
                 const cueOpacity = gsap.utils.clamp(0, 1, 1 - (p / 0.05));
                 scrollCue.style.opacity = cueOpacity;
 
-                // Trigger anatomy preloading when hero is 60% scrolled
-                if (p > 0.6 && !anatomyLoadStarted) {
+                // Trigger anatomy preloading at 40% hero scroll
+                if (p > 0.4 && !anatomyLoadStarted) {
                     startAnatomyLoad();
                 }
             }
@@ -790,14 +778,13 @@
             onUpdate: (self) => {
                 const p = self.progress;
 
-                // Map scroll progress → frame index
                 const frameIndex = Math.min(
                     Math.floor(p * SEQUENCES.anatomy.totalFrames),
                     SEQUENCES.anatomy.totalFrames - 1
                 );
                 anatomyPlayer.drawFrame(frameIndex);
 
-                // Anatomy label fade in (0%→5%) then fade out (8%→15%)
+                // Anatomy label: fade in 0→5%, hold 5→8%, fade out 8→15%
                 let labelOpacity = 0;
                 if (p < 0.05) {
                     labelOpacity = p / 0.05;
