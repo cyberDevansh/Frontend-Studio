@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VELOCITY-X | Next-Gen Athletics</title>
+<meta name="description" content="VELOCITY-X — the next generation of athletic performance footwear. Scroll to experience the cinematic reveal."/>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Anybody:wght@400;700;800&family=Hanken+Grotesk:wght@300;400&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+<!-- GSAP & Lenis -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                "colors": {
+                    "surface-tint": "#98cbff",
+                    "on-primary-fixed-variant": "#004a77",
+                    "background": "#000000",
+                    "primary-fixed": "#cfe5ff",
+                    "on-tertiary-container": "#333535",
+                    "on-secondary-fixed": "#1b1b1d",
+                    "on-background": "#e2e2e2",
+                    "surface-container": "#1f1f1f",
+                    "on-primary-container": "#00375a",
+                    "secondary": "#c8c6c8",
+                    "primary-container": "#00a3ff",
+                    "secondary-fixed-dim": "#c8c6c8",
+                    "surface-bright": "#393939",
+                    "on-surface-variant": "#bec7d4",
+                    "surface-container-lowest": "#0e0e0e",
+                    "surface-container-highest": "#353535",
+                    "surface-container-low": "#1b1b1b",
+                    "tertiary-container": "#9c9d9d",
+                    "secondary-fixed": "#e4e2e4",
+                    "on-error": "#690005",
+                    "surface": "#000000",
+                    "on-secondary-container": "#b6b4b7",
+                    "electric-blue-glow": "rgba(0, 163, 255, 0.4)",
+                    "on-surface": "#e2e2e2",
+                    "tertiary": "#c6c6c7",
+                    "charcoal-surface": "#121212",
+                    "outline": "#88919d",
+                    "error-container": "#93000a",
+                    "on-error-container": "#ffdad6",
+                    "inverse-surface": "#e2e2e2",
+                    "secondary-container": "#474649",
+                    "error": "#ffb4ab",
+                    "on-secondary-fixed-variant": "#474649",
+                    "outline-variant": "#3f4852",
+                    "primary": "#00a3ff",
+                    "on-secondary": "#303032",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "surface-variant": "#353535",
+                    "inverse-on-surface": "#303030",
+                    "tertiary-fixed": "#e2e2e2",
+                    "on-primary": "#000000",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "inverse-primary": "#00629d",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "glass-stroke": "rgba(255, 255, 255, 0.15)",
+                    "primary-fixed-dim": "#98cbff",
+                    "surface-container-high": "#2a2a2a",
+                    "on-tertiary": "#2f3131",
+                    "on-primary-fixed": "#001d33",
+                    "surface-dim": "#131313"
+                },
+                "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+                },
+                "spacing": {
+                    "gutter": "24px",
+                    "margin-mobile": "24px",
+                    "section-gap": "160px",
+                    "stack-lg": "32px",
+                    "stack-md": "16px",
+                    "margin-desktop": "80px",
+                    "stack-sm": "8px"
+                },
+                "fontFamily": {
+                    "display-lg-mobile": ["Anybody", "sans-serif"],
+                    "label-caps": ["JetBrains Mono", "monospace"],
+                    "headline-md": ["Anybody", "sans-serif"],
+                    "body-lg": ["Hanken Grotesk", "sans-serif"],
+                    "body-sm": ["Hanken Grotesk", "sans-serif"],
+                    "display-lg": ["Anybody", "sans-serif"]
+                },
+                "fontSize": {
+                    "display-lg-mobile": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                    "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.15em", "fontWeight": "500" }],
+                    "headline-md": ["40px", { "lineHeight": "48px", "letterSpacing": "0.02em", "fontWeight": "700" }],
+                    "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "300" }],
+                    "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                    "display-lg": ["80px", { "lineHeight": "88px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                }
+            },
+        },
+    }
+</script>
+
+<style>
+    /* ===== Base ===== */
+    body {
+        background-color: #000000;
+        color: #e2e2e2;
+        overflow-x: hidden;
+    }
+
+    /* ===== Lenis ===== */
+    html.lenis { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto; }
+    .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+    .lenis.lenis-stopped { overflow: hidden; }
+    .lenis.lenis-scrolling iframe { pointer-events: none; }
+
+    /* ===== Loading Overlay ===== */
+    #loader {
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        background: #000000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #loader.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+    #loader .brand {
+        font-family: 'Anybody', sans-serif;
+        font-weight: 800;
+        font-size: 32px;
+        letter-spacing: -0.02em;
+        color: #e2e2e2;
+        text-transform: uppercase;
+    }
+    #load-bar-track {
+        width: 200px;
+        height: 2px;
+        background: #1f1f1f;
+        border-radius: 9999px;
+        overflow: hidden;
+        margin-top: 32px;
+    }
+    #load-bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #00a3ff, #98cbff);
+        border-radius: 9999px;
+        transition: width 0.15s ease-out;
+    }
+    #load-text {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.15em;
+        color: #88919d;
+        margin-top: 16px;
+        text-transform: uppercase;
+    }
+
+    /* ===== Top Progress Bar (visible after loader hides) ===== */
+    #top-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #00a3ff, #98cbff);
+        z-index: 300;
+        transition: width 0.1s linear, opacity 0.5s ease;
+        pointer-events: none;
+    }
+
+    /* ===== Navigation ===== */
+    .glass-nav {
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+    }
+
+    /* ===== Buttons ===== */
+    .btn-primary {
+        background: linear-gradient(180deg, #00a3ff 0%, #0082cc 100%);
+        box-shadow: 0 0 20px rgba(0, 163, 255, 0.4);
+    }
+    .btn-secondary {
+        border: 1px solid #00a3ff;
+        transition: all 0.3s ease;
+    }
+    .btn-secondary:hover {
+        box-shadow: 0 0 15px rgba(0, 163, 255, 0.3);
+    }
+
+    /* ===== Canvas Sections ===== */
+    .sequence-section {
+        position: relative;
+        width: 100%;
+        background: #000000;
+    }
+    .canvas-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        background: #000000;
+        will-change: transform;
+    }
+    .sequence-canvas {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000000;
+    }
+
+    /* ===== Hero Overlay ===== */
+    #hero-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        padding-bottom: 10vh;
+        z-index: 10;
+        pointer-events: none;
+    }
+    #hero-overlay .hero-title {
+        text-shadow: 0 4px 40px rgba(0, 0, 0, 0.8);
+    }
+    #hero-overlay .hero-subtitle {
+        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    #scroll-cue {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        animation: bounce-gentle 2s ease-in-out infinite;
+        pointer-events: none;
+    }
+    @keyframes bounce-gentle {
+        0%, 100% { transform: translateX(-50%) translateY(0); }
+        50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ===== Section Transitions ===== */
+    .section-fade-in {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .section-fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* ===== Macro Sections (preserved from original) ===== */
+    .mask-image-bottom {
+        -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+        mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    }
+
+    /* ===== Anatomy Section Transition Overlay ===== */
+    .anatomy-intro-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        pointer-events: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .anatomy-intro-overlay .anatomy-label {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.15em;
+        color: #88919d;
+        text-transform: uppercase;
+        opacity: 0;
+    }
+</style>
+</head>
+
+<body class="antialiased font-body-lg overflow-x-hidden selection:bg-primary selection:text-on-primary">
+
+<!-- ===== Loading Overlay ===== -->
+<div id="loader">
+    <span class="brand">VELOCITY-X</span>
+    <div id="load-bar-track">
+        <div id="load-bar"></div>
+    </div>
+    <span id="load-text">INITIALIZING 0%</span>
+</div>
+
+<!-- ===== Top Progress Bar ===== -->
+<div id="top-progress" style="width: 0%; opacity: 0;"></div>
+
+<!-- ===== Navigation ===== -->
+<nav class="fixed top-0 w-full flex justify-between items-center px-margin-mobile md:px-margin-desktop py-stack-md z-50 glass-nav border-none" id="main-nav">
+    <a class="font-display-lg-mobile md:font-display-lg text-[24px] md:text-[32px] tracking-tighter text-on-surface" href="#">VELOCITY-X</a>
+    <div class="hidden md:flex gap-8 items-center">
+        <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors duration-300" href="#anatomy-sequence">Aero-Frame</a>
+        <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors duration-300" href="#innovation">Energy-Cell</a>
+    </div>
+    <button class="btn-primary font-label-caps text-label-caps text-on-primary px-6 py-3 rounded-full hover:scale-95 transition-transform duration-200 uppercase" id="buy-now-btn">
+        Buy Now
+    </button>
+</nav>
+
+<main>
+<!-- ========================================== -->
+<!-- SECTION 1: HERO SEQUENCE (frame_1)         -->
+<!-- 300 frames • scroll-driven • pinned        -->
+<!-- ========================================== -->
+<section class="sequence-section" id="hero-sequence" style="height: 500vh;">
+    <div class="canvas-wrapper" id="hero-canvas-wrapper">
+        <canvas class="sequence-canvas" id="hero-canvas"></canvas>
+
+        <!-- Text Overlay -->
+        <div id="hero-overlay">
+            <h1 class="hero-title font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface uppercase" style="opacity: 0; transform: translateY(40px);">VELOCITY-X</h1>
+            <p class="hero-subtitle font-headline-md text-[24px] md:text-headline-md text-primary mt-4 tracking-widest uppercase" style="opacity: 0; transform: translateY(20px);">Defy Gravity.</p>
+        </div>
+
+        <!-- Scroll Cue -->
+        <div id="scroll-cue">
+            <span class="font-label-caps text-label-caps text-on-surface-variant mb-2 opacity-60">Scroll to Explore</span>
+            <span class="material-symbols-outlined text-on-surface-variant opacity-60">arrow_downward</span>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================== -->
+<!-- SECTION 1.5: MACRO DARK (unchanged)        -->
+<!-- ========================================== -->
+<section class="relative h-[150vh] w-full bg-background overflow-hidden" id="macro-dark">
+    <div class="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 flex items-center justify-center">
+            <img alt="Dark side profile of the running shoe with subtle lighting." class="w-full h-full object-cover opacity-60 macro-img-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNzSYfuKCbTnSs2l3_6IFtAR1gIOLdUJrNp1H-X5SxrIcvMoDnjrcn1WB-E-XA710_A-gWdfhn1h_f_afPcRjyPOGcUPJf_D_5-C82qX87zkRk3IaTO5Tsk88vSLQOtg7MYvOMhA-A_0xZZr1cMMLFszTsUEz4sW-88gqqsanQZ73MrYoIhjVEnwMobUxngDcqFFXMCQGX_seLGsC2SGiDKFFt-rEzSbMM1OCUDBHzwhMg_9SoAGO80a5umiosYT1zHg"/>
+        </div>
+        <div class="relative z-10 w-full max-w-[1200px] px-margin-mobile md:px-margin-desktop text-left">
+            <h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface uppercase leading-none mb-stack-md macro-title-1">Stealth<br/><span class="text-on-surface-variant">Mode.</span></h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-md mb-stack-lg macro-text-1">
+                Engineered for the shadows. The ultra-lightweight upper blends seamlessly into the night, providing breathability without compromising structural integrity.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================== -->
+<!-- SECTION 1.6: MACRO GLOW (unchanged)        -->
+<!-- ========================================== -->
+<section class="relative h-[150vh] w-full bg-background overflow-hidden" id="macro-glow">
+    <div class="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 flex items-center justify-center">
+            <img alt="Glowing blue outline of the running shoe highlighting its structure." class="w-full h-full object-cover opacity-80 macro-img-2 mix-blend-screen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFWb4Do4cKO4JzwfWP63ap6gy4aGP3endrr1FbSFPoFTbseDgYPDLMGHuZh4kn2tH_ehWsWZEoL-S8JE_ASsjDKffesp9J53p8XSbGt4yfSguaEWn6yG0pl0DesdIc3AiukXwFR_F36JVK8j1H4hF8pmUvru8cfYUAJoH3DsSFBPO1vZ-0Bm1CbIvxyopbQqD7YfSxq7zvp9mH8XfScf5R9vHiEA-hywFEwjTLK-K7FAc3w7VEKkmp82md3MdZdzSlJw"/>
+        </div>
+        <div class="relative z-10 w-full max-w-[1200px] px-margin-mobile md:px-margin-desktop text-right flex flex-col items-end">
+            <h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary uppercase leading-none mb-stack-md macro-title-2">Kinetic<br/><span class="text-on-surface">Energy.</span></h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-md mb-stack-lg macro-text-2 text-left">
+                Every fiber is designed to propel you forward. The bioluminescent-inspired accents highlight the core structural elements that map to your foot's natural biomechanics.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================== -->
+<!-- SECTION 2: ANATOMY SEQUENCE (frame_2)      -->
+<!-- 300 frames • scroll-driven • pinned        -->
+<!-- ========================================== -->
+<section class="sequence-section" id="anatomy-sequence" style="height: 500vh;">
+    <div class="canvas-wrapper" id="anatomy-canvas-wrapper">
+        <canvas class="sequence-canvas" id="anatomy-canvas"></canvas>
+        <!-- Subtle section intro label -->
+        <div class="anatomy-intro-overlay">
+            <span class="anatomy-label" id="anatomy-label">AERO-FRAME ANATOMY</span>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================== -->
+<!-- SECTION 3: INNOVATION (unchanged)          -->
+<!-- ========================================== -->
+<section class="relative min-h-screen w-full flex items-center justify-center py-section-gap px-margin-mobile md:px-margin-desktop bg-background overflow-hidden" id="innovation">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-stack-lg max-w-[1440px] w-full mx-auto relative z-10">
+        <div class="flex flex-col justify-center order-2 md:order-1 innovation-text">
+            <h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface uppercase leading-none mb-stack-md">Energy<br/><span class="text-primary">Reimagined.</span></h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-md mb-stack-lg">
+                Propulsion meets precision. The integrated carbon-fiber skeleton works in tandem with our highest-volume air displacement system yet. Every strike returns more energy than ever before.
+            </p>
+            <div class="flex gap-4">
+                <button class="btn-primary font-label-caps text-label-caps text-on-primary px-8 py-4 rounded-full uppercase hover:scale-95 transition-transform duration-200" id="pre-order-btn">
+                    Pre-Order
+                </button>
+                <button class="btn-secondary font-label-caps text-label-caps text-primary px-8 py-4 rounded-full uppercase bg-transparent" id="tech-specs-btn">
+                    Tech Specs
+                </button>
+            </div>
+        </div>
+        <div class="order-1 md:order-2 flex items-center justify-center relative h-[50vh] md:h-[80vh] innovation-img-container">
+            <div class="absolute inset-0 bg-primary opacity-10 blur-[100px] rounded-full transform scale-75"></div>
+            <img class="w-full h-full object-cover rounded-3xl z-10 innovation-shoe border border-glass-stroke" alt="Profile view of the VELOCITY-X shoe with electric blue lightning effect" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBy0Q1ZE4-6C73oWNOLB3jOuFhIKcmIo2xn63HrCkkndNvj8jzFrTWfMmEjNPaczPaJEcBF0JDKnuDFlshCqnXOl_9VBPFj6hmshNwbn6XEfA-5A5qzRy6w7VAm1CJrPhXNYRmUlQ1jRh5OSHrEksYut7BXvqeZHPD0XmS8jSvSnM8Q4ttAPhJjMmw8vkO5UxiMeyr432MLY1cf-6iTw2xSB9YJVVrrpHof_Lb7JLA-FZnt6p77w4qNxoKlXC24D1A93w"/>
+        </div>
+    </div>
+</section>
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="w-full bg-background border-t border-glass-stroke flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-stack-lg gap-stack-md">
+    <div class="font-display-lg-mobile text-[20px] text-on-surface uppercase tracking-tighter">
+        VELOCITY-X
+    </div>
+    <div class="flex gap-6">
+        <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy</a>
+        <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Terms</a>
+        <a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Technical Specs</a>
+    </div>
+    <div class="font-label-caps text-label-caps text-on-surface-variant">
+        © 2024 NEXT-GEN ATHLETICS. ALL RIGHTS RESERVED.
+    </div>
+</footer>
+
+<!-- ========================================== -->
+<!-- JAVASCRIPT: Frame Engine + Animations      -->
+<!-- ========================================== -->
+<script>
+(function() {
+    'use strict';
+
+    /* =========================================
+       CONFIGURATION
+    ========================================= */
+    const SEQUENCES = {
+        hero: {
+            folder: 'frame_1_shoe_floating',
+            totalFrames: 300,
+            canvasId: 'hero-canvas',
+            wrapperId: 'hero-canvas-wrapper',
+            sectionId: 'hero-sequence',
+        },
+        anatomy: {
+            folder: 'frame_2_',
+            totalFrames: 300,
+            canvasId: 'anatomy-canvas',
+            wrapperId: 'anatomy-canvas-wrapper',
+            sectionId: 'anatomy-sequence',
+        }
+    };
+
+    const BATCH_SIZE = 20;           // frames loaded per batch
+    const INITIAL_FRAMES = 40;       // frames to load before hiding loader
+
+    /* =========================================
+       FRAME PLAYER CLASS
+    ========================================= */
+    class FramePlayer {
+        constructor(config) {
+            this.canvas = document.getElementById(config.canvasId);
+            this.ctx = this.canvas.getContext('2d', { alpha: false });
+            this.folder = config.folder;
+            this.totalFrames = config.totalFrames;
+            this.frames = new Array(config.totalFrames).fill(null);
+            this.currentFrame = -1;
+            this.loadedCount = 0;
+            this.isFullyLoaded = false;
+            this._resizeCanvas();
+
+            // High quality scaling
+            this.ctx.imageSmoothingEnabled = true;
+            this.ctx.imageSmoothingQuality = 'high';
+        }
+
+        /* Generate the file path for a frame index (0-based) */
+        _getPath(index) {
+            const num = String(index + 1).padStart(3, '0');
+            return `ShoeShowcasing/Frames/${this.folder}/ezgif-frame-${num}.png`;
+        }
+
+        /* Load a single frame, returns a Promise */
+        _loadOne(index) {
+            return new Promise((resolve) => {
+                if (this.frames[index]) { resolve(true); return; }
+                const img = new Image();
+                img.onload = () => {
+                    this.frames[index] = img;
+                    this.loadedCount++;
+                    if (this.loadedCount === this.totalFrames) this.isFullyLoaded = true;
+                    resolve(true);
+                };
+                img.onerror = () => {
+                    resolve(false);
+                };
+                img.src = this._getPath(index);
+            });
+        }
+
+        /* Load a batch of frames (start inclusive, end exclusive) */
+        async loadBatch(start, end) {
+            const promises = [];
+            const clampedEnd = Math.min(end, this.totalFrames);
+            for (let i = start; i < clampedEnd; i++) {
+                promises.push(this._loadOne(i));
+            }
+            await Promise.all(promises);
+        }
+
+        /* Load all frames in sequential batches, calling onProgress after each batch */
+        async loadAll(onProgress) {
+            for (let i = 0; i < this.totalFrames; i += BATCH_SIZE) {
+                await this.loadBatch(i, i + BATCH_SIZE);
+                if (onProgress) onProgress(this.loadedCount, this.totalFrames);
+            }
+        }
+
+        /* Find the nearest loaded frame to the target index */
+        _findNearest(target) {
+            if (this.frames[target]) return target;
+            for (let offset = 1; offset < this.totalFrames; offset++) {
+                const before = target - offset;
+                const after = target + offset;
+                if (before >= 0 && this.frames[before]) return before;
+                if (after < this.totalFrames && this.frames[after]) return after;
+            }
+            return -1;
+        }
+
+        /* Draw a specific frame index to the canvas */
+        drawFrame(targetIndex) {
+            const index = this._findNearest(targetIndex);
+            if (index < 0 || index === this.currentFrame) return;
+
+            this.currentFrame = index;
+            const img = this.frames[index];
+            this._renderCover(img);
+        }
+
+        /* Draw the image to fill the canvas (object-fit: cover behavior) */
+        _renderCover(img) {
+            const cw = this.canvas.width;
+            const ch = this.canvas.height;
+            const iw = img.naturalWidth;
+            const ih = img.naturalHeight;
+
+            const canvasRatio = cw / ch;
+            const imgRatio = iw / ih;
+
+            let sx, sy, sw, sh;
+            if (imgRatio > canvasRatio) {
+                // Image wider than canvas — crop sides
+                sh = ih;
+                sw = sh * canvasRatio;
+                sx = (iw - sw) / 2;
+                sy = 0;
+            } else {
+                // Image taller than canvas — crop top/bottom
+                sw = iw;
+                sh = sw / canvasRatio;
+                sx = 0;
+                sy = (ih - sh) / 2;
+            }
+
+            this.ctx.drawImage(img, sx, sy, sw, sh, 0, 0, cw, ch);
+        }
+
+        /* Resize the canvas to fill the viewport */
+        _resizeCanvas() {
+            this.canvas.width = window.innerWidth;
+            this.canvas.height = window.innerHeight;
+        }
+
+        /* Handle window resize */
+        resize() {
+            this._resizeCanvas();
+            this.ctx.imageSmoothingEnabled = true;
+            this.ctx.imageSmoothingQuality = 'high';
+            // Redraw current frame at new size
+            if (this.currentFrame >= 0 && this.frames[this.currentFrame]) {
+                this._renderCover(this.frames[this.currentFrame]);
+            }
+        }
+    }
+
+    /* =========================================
+       DOM REFERENCES
+    ========================================= */
+    const loader         = document.getElementById('loader');
+    const loadBar        = document.getElementById('load-bar');
+    const loadText       = document.getElementById('load-text');
+    const topProgress    = document.getElementById('top-progress');
+    const heroOverlay    = document.getElementById('hero-overlay');
+    const heroTitle      = heroOverlay.querySelector('.hero-title');
+    const heroSubtitle   = heroOverlay.querySelector('.hero-subtitle');
+    const scrollCue      = document.getElementById('scroll-cue');
+    const anatomyLabel   = document.getElementById('anatomy-label');
+
+    /* =========================================
+       LENIS SMOOTH SCROLL
+    ========================================= */
+    const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
+        gestureDirection: 'vertical',
+        smooth: true,
+        mouseMultiplier: 1,
+        smoothTouch: false,
+        touchMultiplier: 2,
+        infinite: false,
+    });
+
+    // Stop scrolling while loading
+    lenis.stop();
+
+    // Integrate Lenis with GSAP ticker
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+
+    // Register ScrollTrigger
+    gsap.registerPlugin(ScrollTrigger);
+
+    /* =========================================
+       CREATE FRAME PLAYERS
+    ========================================= */
+    const heroPlayer = new FramePlayer(SEQUENCES.hero);
+    const anatomyPlayer = new FramePlayer(SEQUENCES.anatomy);
+
+    /* =========================================
+       LOADING ORCHESTRATION
+    ========================================= */
+    let totalLoadedGlobal = 0;
+    const totalFramesGlobal = SEQUENCES.hero.totalFrames + SEQUENCES.anatomy.totalFrames;
+    let loaderDismissed = false;
+    let anatomyLoadStarted = false;
+
+    function updateLoaderUI(loaded, total) {
+        const pct = Math.round((loaded / total) * 100);
+        loadBar.style.width = pct + '%';
+        loadText.textContent = `LOADING FRAMES ${pct}%`;
+    }
+
+    function updateTopProgress() {
+        const pct = (totalLoadedGlobal / totalFramesGlobal) * 100;
+        topProgress.style.width = pct + '%';
+        if (totalLoadedGlobal >= totalFramesGlobal) {
+            // Fully loaded — fade out the progress bar
+            setTimeout(() => {
+                topProgress.style.opacity = '0';
+            }, 500);
+        }
+    }
+
+    function dismissLoader() {
+        if (loaderDismissed) return;
+        loaderDismissed = true;
+
+        // Draw first frame
+        heroPlayer.drawFrame(0);
+
+        // Fade out loader
+        loader.classList.add('hidden');
+
+        // Enable scrolling
+        lenis.start();
+
+        // Show top progress bar for remaining loads
+        topProgress.style.opacity = '1';
+
+        // Animate hero title in
+        setTimeout(() => {
+            animateHeroIntro();
+        }, 600);
+    }
+
+    function animateHeroIntro() {
+        gsap.to(heroTitle, {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: 'power3.out',
+        });
+        gsap.to(heroSubtitle, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: 'power2.out',
+            delay: 0.4,
+        });
+    }
+
+    async function startAnatomyLoad() {
+        if (anatomyLoadStarted) return;
+        anatomyLoadStarted = true;
+
+        await anatomyPlayer.loadAll((loaded) => {
+            totalLoadedGlobal = heroPlayer.loadedCount + loaded;
+            updateTopProgress();
+        });
+    }
+
+    /* Main loading sequence */
+    async function initLoading() {
+        // Phase 1: Load hero initial frames (fast — enough to start)
+        await heroPlayer.loadBatch(0, INITIAL_FRAMES);
+        totalLoadedGlobal = heroPlayer.loadedCount;
+        updateLoaderUI(heroPlayer.loadedCount, SEQUENCES.hero.totalFrames);
+
+        // Dismiss loader — user can start scrolling
+        dismissLoader();
+        setupScrollTriggers();
+
+        // Phase 2: Continue loading remaining hero frames in background
+        for (let i = INITIAL_FRAMES; i < SEQUENCES.hero.totalFrames; i += BATCH_SIZE) {
+            await heroPlayer.loadBatch(i, i + BATCH_SIZE);
+            totalLoadedGlobal = heroPlayer.loadedCount + anatomyPlayer.loadedCount;
+            updateTopProgress();
+        }
+
+        // Phase 3: Start anatomy sequence loading
+        await startAnatomyLoad();
+    }
+
+    /* =========================================
+       SCROLL TRIGGERS
+    ========================================= */
+    function setupScrollTriggers() {
+        // ---- Hero Sequence ----
+        ScrollTrigger.create({
+            trigger: '#hero-sequence',
+            start: 'top top',
+            end: 'bottom bottom',
+            pin: '#hero-canvas-wrapper',
+            onUpdate: (self) => {
+                const p = self.progress;
+
+                // Map scroll progress → frame index
+                const frameIndex = Math.min(
+                    Math.floor(p * SEQUENCES.hero.totalFrames),
+                    SEQUENCES.hero.totalFrames - 1
+                );
+                heroPlayer.drawFrame(frameIndex);
+
+                // Fade out hero text overlay (0% → 12% scroll)
+                const overlayOpacity = gsap.utils.clamp(0, 1, 1 - (p / 0.12));
+                heroOverlay.style.opacity = overlayOpacity;
+
+                // Fade out scroll cue immediately (0% → 5% scroll)
+                const cueOpacity = gsap.utils.clamp(0, 1, 1 - (p / 0.05));
+                scrollCue.style.opacity = cueOpacity;
+
+                // Trigger anatomy preloading when hero is 60% scrolled
+                if (p > 0.6 && !anatomyLoadStarted) {
+                    startAnatomyLoad();
+                }
+            }
+        });
+
+        // ---- Anatomy Sequence ----
+        ScrollTrigger.create({
+            trigger: '#anatomy-sequence',
+            start: 'top top',
+            end: 'bottom bottom',
+            pin: '#anatomy-canvas-wrapper',
+            onUpdate: (self) => {
+                const p = self.progress;
+
+                // Map scroll progress → frame index
+                const frameIndex = Math.min(
+                    Math.floor(p * SEQUENCES.anatomy.totalFrames),
+                    SEQUENCES.anatomy.totalFrames - 1
+                );
+                anatomyPlayer.drawFrame(frameIndex);
+
+                // Anatomy label fade in (0%→5%) then fade out (8%→15%)
+                let labelOpacity = 0;
+                if (p < 0.05) {
+                    labelOpacity = p / 0.05;
+                } else if (p < 0.08) {
+                    labelOpacity = 1;
+                } else if (p < 0.15) {
+                    labelOpacity = 1 - ((p - 0.08) / 0.07);
+                }
+                anatomyLabel.style.opacity = gsap.utils.clamp(0, 1, labelOpacity);
+            }
+        });
+
+        // ---- Macro Dark ----
+        const tlMacroDark = gsap.timeline({
+            scrollTrigger: {
+                trigger: '#macro-dark',
+                start: 'top top',
+                end: '+=100%',
+                scrub: 1,
+                pin: true,
+            }
+        });
+        tlMacroDark.fromTo('.macro-img-1',
+            { scale: 1, opacity: 0.2 },
+            { scale: 1.3, opacity: 1, duration: 1, ease: 'power1.inOut' }
+        )
+        .fromTo(['.macro-title-1', '.macro-text-1'],
+            { y: 50, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.5, stagger: 0.2 },
+            '-=0.5'
+        );
+
+        // ---- Macro Glow ----
+        const tlMacroGlow = gsap.timeline({
+            scrollTrigger: {
+                trigger: '#macro-glow',
+                start: 'top top',
+                end: '+=100%',
+                scrub: 1,
+                pin: true,
+            }
+        });
+        tlMacroGlow.fromTo('.macro-img-2',
+            { scale: 1.5, opacity: 0 },
+            { scale: 1.1, opacity: 1, duration: 1, ease: 'power2.out' }
+        )
+        .fromTo(['.macro-title-2', '.macro-text-2'],
+            { y: 50, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.5, stagger: 0.2 },
+            '-=0.3'
+        );
+
+        // ---- Innovation ----
+        gsap.fromTo('.innovation-img-container',
+            { y: 100, opacity: 0 },
+            {
+                y: 0, opacity: 1, duration: 1.5, ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: '#innovation',
+                    start: 'top 70%',
+                }
+            }
+        );
+        gsap.fromTo('.innovation-text',
+            { x: -50, opacity: 0 },
+            {
+                x: 0, opacity: 1, duration: 1.5, ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: '#innovation',
+                    start: 'top 60%',
+                }
+            }
+        );
+    }
+
+    /* =========================================
+       WINDOW RESIZE
+    ========================================= */
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            heroPlayer.resize();
+            anatomyPlayer.resize();
+            ScrollTrigger.refresh();
+        }, 150);
+    });
+
+    /* =========================================
+       BOOT
+    ========================================= */
+    initLoading();
+
+})();
+</script>
+
+</body>
+</html>
