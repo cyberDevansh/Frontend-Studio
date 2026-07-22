@@ -191,6 +191,7 @@ nav {
     background: linear-gradient(90deg, #6ee7ff, #8b5cf6, #ffffff);
 
     -webkit-background-clip: text;
+    background-clip: text;
 
     color: transparent;
 
