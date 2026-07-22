@@ -1,14 +1,15 @@
 :root {
 
-    --bg: #050816;
-    --card: rgba(255, 255, 255, .05);
-    --border: rgba(255, 255, 255, .08);
+    --bg: #0a0a0a;
+    --card: rgba(0, 240, 255, 0.04);
+    --border: rgba(0, 240, 255, 0.15);
 
     --text: #ffffff;
-    --muted: #9ca3af;
+    --muted: #a1a1aa;
 
-    --primary: #6ee7ff;
-    --secondary: #8b5cf6;
+    --primary: #00f0ff;
+    --secondary: #0066ff;
+    --accent: #ff9500;
 
 }
 
@@ -34,61 +35,19 @@ body {
 
 }
 
-.bg-grid {
-
+.spline-container {
     position: fixed;
     inset: 0;
-
-    background-image:
-
-        linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px),
-
-        linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px);
-
-    background-size: 55px 55px;
-
-    mask-image: radial-gradient(circle, black 40%, transparent 100%);
-
+    width: 100vw;
+    height: 100vh;
     z-index: -5;
-
+    background: var(--bg);
+    overflow: hidden;
 }
 
-.glow {
-
-    position: fixed;
-
-    border-radius: 50%;
-
-    filter: blur(120px);
-
-    z-index: -4;
-
-    opacity: .45;
-
-}
-
-.glow1 {
-
-    width: 420px;
-    height: 420px;
-
-    background: #3b82f6;
-
-    top: -150px;
-    left: -120px;
-
-}
-
-.glow2 {
-
-    width: 400px;
-    height: 400px;
-
-    background: #8b5cf6;
-
-    bottom: -120px;
-    right: -80px;
-
+.spline-container spline-viewer {
+    width: 100%;
+    height: 100%;
 }
 
 nav {
@@ -164,11 +123,11 @@ nav {
 
     border-radius: 999px;
 
-    background: rgba(255, 255, 255, .05);
+    background: rgba(0, 240, 255, .05);
 
     border: 1px solid var(--border);
 
-    color: #d1d5db;
+    color: var(--primary);
 
     margin-bottom: 30px;
 
@@ -188,7 +147,7 @@ nav {
 
 .hero span {
 
-    background: linear-gradient(90deg, #6ee7ff, #8b5cf6, #ffffff);
+    background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
 
     -webkit-background-clip: text;
     background-clip: text;
@@ -258,9 +217,9 @@ nav {
     inset: 0;
 
     background: linear-gradient(135deg,
-            rgba(110, 231, 255, .12),
+            rgba(0, 240, 255, .15),
             transparent,
-            rgba(139, 92, 246, .12));
+            rgba(0, 102, 255, .15));
 
     opacity: 0;
 
@@ -272,11 +231,11 @@ nav {
 
     transform: translateY(-10px);
 
-    border-color: rgba(110, 231, 255, .35);
+    border-color: rgba(0, 240, 255, .35);
 
     box-shadow:
 
-        0 25px 80px rgba(0, 0, 0, .45);
+        0 25px 80px rgba(0, 240, 255, .15);
 
 }
 
@@ -305,7 +264,7 @@ nav {
     width: 10px;
     height: 10px;
 
-    background: #00ff84;
+    background: var(--primary);
 
     border-radius: 50%;
 
@@ -313,7 +272,7 @@ nav {
 
     margin-right: 8px;
 
-    box-shadow: 0 0 12px #00ff84;
+    box-shadow: 0 0 12px var(--primary);
 
 }
 
@@ -363,9 +322,11 @@ nav {
 
     padding: 9px 16px;
 
-    background: rgba(255, 255, 255, .06);
+    background: rgba(0, 240, 255, .06);
 
     border-radius: 999px;
+
+    border: 1px solid rgba(0, 240, 255, .15);
 
     font-size: 13px;
 
@@ -393,9 +354,9 @@ nav {
 
     border-radius: 999px;
 
-    background: #8b5cf620;
+    background: rgba(255, 149, 0, 0.15);
 
-    color: #d8b4fe;
+    color: var(--accent);
 
     margin-bottom: 25px;
 
